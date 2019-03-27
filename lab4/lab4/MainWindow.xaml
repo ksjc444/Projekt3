@@ -13,19 +13,19 @@
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="MainWindow" Height="500" Width="800" WindowStyle="None" ResizeMode="NoResize">
+        Title="MainWindow" Height="600" Width="1200" WindowStyle="None" ResizeMode="NoResize">
 
     <Grid x:Name="mainGrid" Background="#FFEEEEEE" MouseDown="MainGrid_MouseDown">
-        <Label Content="Powered by newsapi.org" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5" />
+        <Label Content="Powered by newsapi.org" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5" Margin="250 0 0 0"/>
         <Button x:Name="testowy" Content="Button" HorizontalAlignment="Left" Margin="0,396,0,0" VerticalAlignment="Top" Width="77" Click="Button_Click" Height="23"/>
         <TextBox x:Name="testBlock" HorizontalAlignment="Left" Margin="456,228,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="160" Width="326"/>
         <StackPanel VerticalAlignment="Top">
-            <Grid Background="#FF0069C0" Height="10">
+            <Grid Background="#FF0069C0" Height="10"/>
 
-            </Grid>
+
             <Grid Margin="5">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
+                    <Button x:Name="minimizeButton" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Click="MinimizeButton_Click">
                         <materialDesign:PackIcon Kind="WindowMinimize" Height="25" Width="25"/>
                     </Button>
                     <Button x:Name="maximizeButton" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Click="MaximizeButton_Click">
@@ -37,13 +37,20 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
+        <Grid Margin="250 55 0 0">
+            <Grid x:Name="contentGrid" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+
         <Grid HorizontalAlignment="Left" Width="250" Background="#353535">
-            <StackPanel>
+            <materialDesign:TransitioningContent x:Name="transitioningContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
+                <Grid x:Name="menuPointer" Width="10" HorizontalAlignment="Left" Background="#FF0069C0" Height="60" VerticalAlignment="Top" Margin="0 145 0 0"/>
+            </materialDesign:TransitioningContent>
+            <StackPanel VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal" Margin="10 20 0 0">
                     <materialDesign:PackIcon Kind="Menu" Width="30" Height="30" Foreground="LightGray"/>
                     <TextBlock Text="Menu" VerticalAlignment="Center" FontSize="20" Margin="15 0" Foreground="LightGray"/>
                 </StackPanel>
-                <ListView Margin="0 30 0 0" Foreground="LightGray">
+                <ListView x:Name="listViewMenu" Margin="10 60 0 0" Foreground="LightGray" SelectionChanged="ListViewMenu_SelectionChanged">
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Globe" Width="30" Height="30"/>

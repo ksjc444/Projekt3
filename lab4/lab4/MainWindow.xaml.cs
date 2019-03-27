@@ -43,7 +43,7 @@ namespace lab4
                     testBlock.Text += "\n--------------------\n\n";
                 }
             }
-            catch(ArgumentException ex) when (ex.ParamName=="category")
+            catch (ArgumentException ex) when (ex.ParamName == "category")
             {
 
                 testowy.Content = "blad: " + ex;
@@ -63,6 +63,77 @@ namespace lab4
         private void MainGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
+        }
+
+        private async void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var userControlGeneral = new UserControlGeneral();
+            var userControlGeneral2 = new UserControlGeneral();
+            int index = listViewMenu.SelectedIndex;
+            MoveMenuPointer(index);
+
+            try
+            {
+                var jsonResponse = await NewsApiConnection.LoadDataAsync("business");
+
+                var newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
+                userControlGeneral.newsTitle.Text = newsCollection.Articles[1].Title;
+                userControlGeneral.newsDescription.Text = newsCollection.Articles[1].Description;
+                userControlGeneral.newsLink.Text = newsCollection.Articles[1].Url;
+                if (newsCollection.Articles[1].UrlToImage != null)
+                    userControlGeneral.newsImage.Source = new BitmapImage(new Uri(newsCollection.Articles[1].UrlToImage));
+            }
+            catch (ArgumentException ex) when (ex.ParamName == "category")
+            {
+
+
+            }
+
+
+            switch (index)
+            {
+                case 0:
+                    contentGrid.Children.Clear();
+                    contentGrid.Children.Add(userControlGeneral);
+                    break;
+                case 1:
+                    contentGrid.Children.Clear();
+                    contentGrid.Children.Add(userControlGeneral);
+                    break;
+                case 2:
+                    contentGrid.Children.Clear();
+                    contentGrid.Children.Add(userControlGeneral);
+                    break;
+                case 3:
+                    contentGrid.Children.Clear();
+                    contentGrid.Children.Add(userControlGeneral);
+                    break;
+                case 4:
+                    contentGrid.Children.Clear();
+                    contentGrid.Children.Add(userControlGeneral);
+                    break;
+                case 5:
+                    contentGrid.Children.Clear();
+                    contentGrid.Children.Add(userControlGeneral);
+                    break;
+                case 6:
+                    contentGrid.Children.Clear();
+                    contentGrid.Children.Add(userControlGeneral);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void MoveMenuPointer(int index)
+        {
+            transitioningContentSlide.OnApplyTemplate();
+            menuPointer.Margin = new Thickness(0, 145 + (60 * index), 0, 0);
+        }
+
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
         }
     }
 }
