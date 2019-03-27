@@ -25,7 +25,7 @@ namespace lab4
         {
             if (possibleCategories.Contains<string>(category))
             {
-                string apiCall = apiBaseUrl["headlines"] + "?country=pl" + "&category=" + "&apiKey=" + apiKey;
+                string apiCall = apiBaseUrl["headlines"] + "?country=pl" + "&category=" + category + "&apiKey=" + apiKey;
                 Task<string> result;
 
                 using (HttpClient client = new HttpClient())

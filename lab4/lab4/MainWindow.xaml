@@ -17,13 +17,19 @@
 
     <Grid x:Name="mainGrid" Background="#FFEEEEEE" MouseDown="MainGrid_MouseDown">
         <Label Content="Powered by newsapi.org" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5" Margin="250 0 0 0"/>
-        <Button x:Name="testowy" Content="Button" HorizontalAlignment="Left" Margin="0,396,0,0" VerticalAlignment="Top" Width="77" Click="Button_Click" Height="23"/>
-        <TextBox x:Name="testBlock" HorizontalAlignment="Left" Margin="456,228,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="160" Width="326"/>
         <StackPanel VerticalAlignment="Top">
-            <Grid Background="#FF0069C0" Height="10"/>
+            <Grid Background="#673ABB" Height="10"/>
 
 
             <Grid Margin="5">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="250 0 0 0">
+                    <Button x:Name="reloadButton" Click="ReloadButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Reload" Height="25" Width="25"/>
+                            <TextBlock Text="Odśwież" VerticalAlignment="Center" Margin="5"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button x:Name="minimizeButton" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Click="MinimizeButton_Click">
                         <materialDesign:PackIcon Kind="WindowMinimize" Height="25" Width="25"/>
@@ -43,7 +49,7 @@
 
         <Grid HorizontalAlignment="Left" Width="250" Background="#353535">
             <materialDesign:TransitioningContent x:Name="transitioningContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
-                <Grid x:Name="menuPointer" Width="10" HorizontalAlignment="Left" Background="#FF0069C0" Height="60" VerticalAlignment="Top" Margin="0 145 0 0"/>
+                <Grid x:Name="menuPointer" Width="10" HorizontalAlignment="Left" Background="#673ABB" Height="60" VerticalAlignment="Top" Margin="0 145 0 0"/>
             </materialDesign:TransitioningContent>
             <StackPanel VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal" Margin="10 20 0 0">

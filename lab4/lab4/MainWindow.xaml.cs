@@ -27,28 +27,14 @@ namespace lab4
             InitializeComponent();
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var jsonResponse = await NewsApiConnection.LoadDataAsync("business");
+        UserControlGeneral newsCategoryGeneral = new UserControlGeneral();
+        UserControlGeneral newsCategoryTechnology = new UserControlGeneral();
+        UserControlGeneral newsCategoryBusiness = new UserControlGeneral();
+        UserControlGeneral newsCategoryScience = new UserControlGeneral();
+        UserControlGeneral newsCategoryEntertainment = new UserControlGeneral();
+        UserControlGeneral newsCategoryHealth = new UserControlGeneral();
+        UserControlGeneral newsCategorySports = new UserControlGeneral();
 
-                var newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
-                testBlock.Text = "";
-                foreach (var article in newsCollection.Articles)
-                {
-                    testBlock.Text += $"OPIS ({article.Source.Name}):\n";
-                    testBlock.Text += article.Description + "\n\nZAWARTOŚĆ:\n";
-                    testBlock.Text += article.Content;
-                    testBlock.Text += "\n--------------------\n\n";
-                }
-            }
-            catch (ArgumentException ex) when (ex.ParamName == "category")
-            {
-
-                testowy.Content = "blad: " + ex;
-            }
-        }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -65,60 +51,41 @@ namespace lab4
             DragMove();
         }
 
-        private async void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var userControlGeneral = new UserControlGeneral();
-            var userControlGeneral2 = new UserControlGeneral();
+            
             int index = listViewMenu.SelectedIndex;
             MoveMenuPointer(index);
-
-            try
-            {
-                var jsonResponse = await NewsApiConnection.LoadDataAsync("business");
-
-                var newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
-                userControlGeneral.newsTitle.Text = newsCollection.Articles[1].Title;
-                userControlGeneral.newsDescription.Text = newsCollection.Articles[1].Description;
-                userControlGeneral.newsLink.Text = newsCollection.Articles[1].Url;
-                if (newsCollection.Articles[1].UrlToImage != null)
-                    userControlGeneral.newsImage.Source = new BitmapImage(new Uri(newsCollection.Articles[1].UrlToImage));
-            }
-            catch (ArgumentException ex) when (ex.ParamName == "category")
-            {
-
-
-            }
-
 
             switch (index)
             {
                 case 0:
                     contentGrid.Children.Clear();
-                    contentGrid.Children.Add(userControlGeneral);
+                    contentGrid.Children.Add(newsCategoryGeneral);
                     break;
                 case 1:
                     contentGrid.Children.Clear();
-                    contentGrid.Children.Add(userControlGeneral);
+                    contentGrid.Children.Add(newsCategoryTechnology);
                     break;
                 case 2:
                     contentGrid.Children.Clear();
-                    contentGrid.Children.Add(userControlGeneral);
+                    contentGrid.Children.Add(newsCategoryBusiness);
                     break;
                 case 3:
                     contentGrid.Children.Clear();
-                    contentGrid.Children.Add(userControlGeneral);
+                    contentGrid.Children.Add(newsCategoryScience);
                     break;
                 case 4:
                     contentGrid.Children.Clear();
-                    contentGrid.Children.Add(userControlGeneral);
+                    contentGrid.Children.Add(newsCategoryEntertainment);
                     break;
                 case 5:
                     contentGrid.Children.Clear();
-                    contentGrid.Children.Add(userControlGeneral);
+                    contentGrid.Children.Add(newsCategoryHealth);
                     break;
                 case 6:
                     contentGrid.Children.Clear();
-                    contentGrid.Children.Add(userControlGeneral);
+                    contentGrid.Children.Add(newsCategorySports);
                     break;
                 default:
                     break;
@@ -134,6 +101,122 @@ namespace lab4
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
+        }
+
+        private async void ReloadButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var jsonResponse = await NewsApiConnection.LoadDataAsync("general");
+                var newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
+
+                newsCategoryGeneral.newsTitle.Text = newsCollection.Articles[1].Title;
+                newsCategoryGeneral.newsDescription.Text = newsCollection.Articles[1].Description;
+                newsCategoryGeneral.newsLink.Text = newsCollection.Articles[1].Source.Name;
+                if (newsCollection.Articles[1].UrlToImage != null)
+                    newsCategoryGeneral.newsImage.Source = new BitmapImage(new Uri(newsCollection.Articles[1].UrlToImage));
+            }
+            catch (ArgumentException ex) when (ex.ParamName == "category")
+            {
+                Console.WriteLine(ex.ParamName + "  -  " + ex.Message);
+            }
+
+            try
+            {
+                var jsonResponse = await NewsApiConnection.LoadDataAsync("technology");
+                var newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
+
+                newsCategoryTechnology.newsTitle.Text = newsCollection.Articles[1].Title;
+                newsCategoryTechnology.newsDescription.Text = newsCollection.Articles[1].Description;
+                newsCategoryTechnology.newsLink.Text = newsCollection.Articles[1].Source.Name;
+                if (newsCollection.Articles[1].UrlToImage != null)
+                    newsCategoryTechnology.newsImage.Source = new BitmapImage(new Uri(newsCollection.Articles[1].UrlToImage));
+            }
+            catch (ArgumentException ex) when (ex.ParamName == "category")
+            {
+                Console.WriteLine(ex.ParamName + "  -  " + ex.Message);
+            }
+
+            try
+            {
+                var jsonResponse = await NewsApiConnection.LoadDataAsync("business");
+                var newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
+
+                newsCategoryBusiness.newsTitle.Text = newsCollection.Articles[1].Title;
+                newsCategoryBusiness.newsDescription.Text = newsCollection.Articles[1].Description;
+                newsCategoryBusiness.newsLink.Text = newsCollection.Articles[1].Source.Name;
+                if (newsCollection.Articles[1].UrlToImage != null)
+                    newsCategoryBusiness.newsImage.Source = new BitmapImage(new Uri(newsCollection.Articles[1].UrlToImage));
+            }
+            catch (ArgumentException ex) when (ex.ParamName == "category")
+            {
+                Console.WriteLine(ex.ParamName + "  -  " + ex.Message);
+            }
+
+            try
+            {
+                var jsonResponse = await NewsApiConnection.LoadDataAsync("science");
+                var newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
+
+                newsCategoryScience.newsTitle.Text = newsCollection.Articles[1].Title;
+                newsCategoryScience.newsDescription.Text = newsCollection.Articles[1].Description;
+                newsCategoryScience.newsLink.Text = newsCollection.Articles[1].Source.Name;
+                if (newsCollection.Articles[1].UrlToImage != null)
+                    newsCategoryScience.newsImage.Source = new BitmapImage(new Uri(newsCollection.Articles[1].UrlToImage));
+            }
+            catch (ArgumentException ex) when (ex.ParamName == "category")
+            {
+                Console.WriteLine(ex.ParamName + "  -  " + ex.Message);
+            }
+
+            try
+            {
+                var jsonResponse = await NewsApiConnection.LoadDataAsync("entertainment");
+                var newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
+
+                newsCategoryEntertainment.newsTitle.Text = newsCollection.Articles[1].Title;
+                newsCategoryEntertainment.newsDescription.Text = newsCollection.Articles[1].Description;
+                newsCategoryEntertainment.newsLink.Text = newsCollection.Articles[1].Source.Name;
+                if (newsCollection.Articles[1].UrlToImage != null)
+                    newsCategoryEntertainment.newsImage.Source = new BitmapImage(new Uri(newsCollection.Articles[1].UrlToImage));
+            }
+            catch (ArgumentException ex) when (ex.ParamName == "category")
+            {
+                Console.WriteLine(ex.ParamName + "  -  " + ex.Message);
+            }
+
+            try
+            {
+                var jsonResponse = await NewsApiConnection.LoadDataAsync("health");
+                var newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
+
+                newsCategoryHealth.newsTitle.Text = newsCollection.Articles[1].Title;
+                newsCategoryHealth.newsDescription.Text = newsCollection.Articles[1].Description;
+                newsCategoryHealth.newsLink.Text = newsCollection.Articles[1].Source.Name;
+                if (newsCollection.Articles[1].UrlToImage != null)
+                    newsCategoryHealth.newsImage.Source = new BitmapImage(new Uri(newsCollection.Articles[1].UrlToImage));
+            }
+            catch (ArgumentException ex) when (ex.ParamName == "category")
+            {
+                Console.WriteLine(ex.ParamName + "  -  " + ex.Message);
+            }
+
+            try
+            {
+                var jsonResponse = await NewsApiConnection.LoadDataAsync("sports");
+                var newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
+
+                newsCategorySports.newsTitle.Text = newsCollection.Articles[1].Title;
+                newsCategorySports.newsDescription.Text = newsCollection.Articles[1].Description;
+                newsCategorySports.newsLink.Text = newsCollection.Articles[1].Source.Name;
+                if (newsCollection.Articles[1].UrlToImage != null)
+                    newsCategorySports.newsImage.Source = new BitmapImage(new Uri(newsCollection.Articles[1].UrlToImage));
+            }
+            catch (ArgumentException ex) when (ex.ParamName == "category")
+            {
+                Console.WriteLine(ex.ParamName + "  -  " + ex.Message);
+            }
+
         }
     }
 }
