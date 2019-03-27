@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -105,8 +106,12 @@ namespace lab4
 
         private async void ReloadButton_Click(object sender, RoutedEventArgs e)
         {
+            string loadingBeginning = "Loading: ";
+            string loadingEnding = " news...";
             try
             {
+                loadingInformationText.Text = loadingBeginning + "general" + loadingEnding;
+                loadingProgressBar.Value = (int)Math.Round((float)0 * 100.0 / 7.0);
                 var jsonResponse = await NewsApiConnection.LoadDataAsync("general");
                 var newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
 
@@ -120,9 +125,15 @@ namespace lab4
             {
                 Console.WriteLine(ex.ParamName + "  -  " + ex.Message);
             }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine("Prawdopodobnie brak połączenia z internetem:  " + ex.Message);
+            }
 
             try
             {
+                loadingInformationText.Text = loadingBeginning + "technology" + loadingEnding;
+                loadingProgressBar.Value = (int)Math.Round((float)1 * 100.0 / 7.0);
                 var jsonResponse = await NewsApiConnection.LoadDataAsync("technology");
                 var newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
 
@@ -136,9 +147,15 @@ namespace lab4
             {
                 Console.WriteLine(ex.ParamName + "  -  " + ex.Message);
             }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine("Prawdopodobnie brak połączenia z internetem:  " + ex.Message);
+            }
 
             try
             {
+                loadingInformationText.Text = loadingBeginning + "business" + loadingEnding;
+                loadingProgressBar.Value = (int)Math.Round((float)2 * 100.0 / 7.0);
                 var jsonResponse = await NewsApiConnection.LoadDataAsync("business");
                 var newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
 
@@ -152,9 +169,15 @@ namespace lab4
             {
                 Console.WriteLine(ex.ParamName + "  -  " + ex.Message);
             }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine("Prawdopodobnie brak połączenia z internetem:  " + ex.Message);
+            }
 
             try
             {
+                loadingInformationText.Text = loadingBeginning + "science" + loadingEnding;
+                loadingProgressBar.Value = (int)Math.Round((float)3 * 100.0 / 7.0);
                 var jsonResponse = await NewsApiConnection.LoadDataAsync("science");
                 var newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
 
@@ -168,9 +191,15 @@ namespace lab4
             {
                 Console.WriteLine(ex.ParamName + "  -  " + ex.Message);
             }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine("Prawdopodobnie brak połączenia z internetem:  " + ex.Message);
+            }
 
             try
             {
+                loadingInformationText.Text = loadingBeginning + "entertainment" + loadingEnding;
+                loadingProgressBar.Value = (int)Math.Round((float)4 * 100.0 / 7.0);
                 var jsonResponse = await NewsApiConnection.LoadDataAsync("entertainment");
                 var newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
 
@@ -184,9 +213,15 @@ namespace lab4
             {
                 Console.WriteLine(ex.ParamName + "  -  " + ex.Message);
             }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine("Prawdopodobnie brak połączenia z internetem:  " + ex.Message);
+            }
 
             try
             {
+                loadingInformationText.Text = loadingBeginning + "health" + loadingEnding;
+                loadingProgressBar.Value = (int)Math.Round((float)5 * 100.0 / 7.0);
                 var jsonResponse = await NewsApiConnection.LoadDataAsync("health");
                 var newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
 
@@ -200,9 +235,15 @@ namespace lab4
             {
                 Console.WriteLine(ex.ParamName + "  -  " + ex.Message);
             }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine("Prawdopodobnie brak połączenia z internetem:  " + ex.Message);
+            }
 
             try
             {
+                loadingInformationText.Text = loadingBeginning + "sports" + loadingEnding;
+                loadingProgressBar.Value = (int)Math.Round((float)6 * 100.0 / 7.0);
                 var jsonResponse = await NewsApiConnection.LoadDataAsync("sports");
                 var newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
 
@@ -216,7 +257,13 @@ namespace lab4
             {
                 Console.WriteLine(ex.ParamName + "  -  " + ex.Message);
             }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine("Prawdopodobnie brak połączenia z internetem:  " + ex.Message);
+            }
 
+            loadingInformationText.Text = "Complete";
+            loadingProgressBar.Value = (int)Math.Round((float)7 * 100.0 / 7.0);
         }
     }
 }

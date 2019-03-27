@@ -43,7 +43,7 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
-        <Grid Margin="250 55 0 0">
+        <Grid Margin="250 55 0 60">
             <Grid x:Name="contentGrid" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
 
@@ -101,6 +101,11 @@
                     </ListViewItem>
                 </ListView>
             </StackPanel>
+        </Grid>
+        <Grid Margin="250,0,0,30" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            
+            <ProgressBar x:Name="loadingProgressBar" Height="25" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="900"/>
+            <TextBlock x:Name="loadingInformationText" Text="Data reload required" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>
