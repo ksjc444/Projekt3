@@ -51,7 +51,14 @@ namespace lab4
 
         private void MainGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            try
+            {
+                DragMove();
+            }
+            catch
+            {
+
+            }
         }
 
         private async void GenerateArticlePage(List<UserControlGeneral> articleList)
