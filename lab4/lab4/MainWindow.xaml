@@ -44,7 +44,9 @@
             </Grid>
         </StackPanel>
         <Grid Margin="250 55 0 60">
+            <ScrollViewer>
             <Grid x:Name="contentGrid" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </ScrollViewer>
         </Grid>
 
         <Grid HorizontalAlignment="Left" Width="250" Background="#353535">
@@ -105,7 +107,7 @@
         <Grid Margin="250,0,0,30" VerticalAlignment="Bottom" HorizontalAlignment="Center">
             
             <ProgressBar x:Name="loadingProgressBar" Height="25" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="900"/>
-            <TextBlock x:Name="loadingInformationText" Text="Data reload required" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock x:Name="loadingInformationText" Text="Data reload required" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#DD000000" Background="#4CFFFFFF"/>
         </Grid>
     </Grid>
 </Window>
