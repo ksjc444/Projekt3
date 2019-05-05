@@ -22,7 +22,8 @@ namespace lab4
     public partial class UserControlGeneral : UserControl
     {
         public string UrlToWebsite { get; set; }
-
+        public int ArticleID { get; set; }
+        public bool IsFavourite { get; set; } = false;
         public UserControlGeneral()
         {
             InitializeComponent();
@@ -46,8 +47,24 @@ namespace lab4
 
         public void TestControlerButtno_Click(object sender, RoutedEventArgs e)
         {
-            OpenWebsite(UrlToWebsite);
+            if (UrlToWebsite != null)
+                OpenWebsite(UrlToWebsite);
         }
 
+        private void FavouriteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!IsFavourite)
+            {
+                FavouriteButton.Foreground = (Brush)new BrushConverter().ConvertFromString(Application.Current.Resources["SecondaryAccentBrush"].ToString());
+                FavouriteButton.Opacity = 1;
+                IsFavourite = true;
+            }
+            else
+            {
+                FavouriteButton.Foreground = (Brush)new BrushConverter().ConvertFromString(Application.Current.Resources["PrimaryHueLightBrush"].ToString());
+                FavouriteButton.Opacity = 0.5;
+                IsFavourite = false;
+            }
+        }
     }
 }

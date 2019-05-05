@@ -8,22 +8,28 @@ namespace lab4
 {
     public class Article
     {
-        Source source;
-        string author;
-        string title;
-        string description;
-        string url;
-        string urlToImage;
-        string publishedAt;
-        string content;
+        //Source source;
+        //string author;
+        //string title;
+        //string description;
+        //string url;
+        //string urlToImage;
+        //string publishedAt;
+        //string content;
+        //bool favourite;
 
-        public Source Source { get => source; set => source = value; }
-        public string Author { get => author; set => author = value; }
-        public string Title { get => title; set => title = value; }
-        public string Description { get => description; set => description = value; }
-        public string Url { get => url; set => url = value; }
-        public string UrlToImage { get => urlToImage; set => urlToImage = value; }
-        public string PublishedAt { get => publishedAt; set => publishedAt = value; }
-        public string Content { get => content; set => content = value; }
+        public int ArticleID { get; set; }
+
+        public Source Source { get; set; }
+        public string Author { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Url { get; set; }
+        public string UrlToImage { get; set; }
+        public DateTime PublishedAt { get; set; }
+        public string Content { get; set; }
+
+        public ArticleCategory Category {get; set;}
+        public bool Favourite { get; set; }
     }
 }

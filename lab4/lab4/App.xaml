@@ -9,8 +9,24 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Amber.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
+
+<!--<Style x:key="FavouriteButtonTemplate" TargetType="Button">
+    <Setter Property="Background" Value="Blue"/>
+    <Setter Property="Foreground" Value="Brown"/>
+    <Setter Property="Template">
+        <Setter.Value>
+            <ControlTemplate>
+                <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderThickness="1">
+                    <ContentPresenter>
+
+                    </ContentPresenter>
+                </Border>
+            </ControlTemplate>
+        </Setter.Value>
+    </Setter>
+</Style>-->
