@@ -57,7 +57,6 @@
                 <UniformGrid x:Name="contentGrid" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </ScrollViewer>
         </Grid>
-
         <Grid HorizontalAlignment="Left" Width="250" Background="#353535">
             <materialDesign:TransitioningContent x:Name="transitioningContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
                 <Grid x:Name="menuPointer" Width="10" HorizontalAlignment="Left" Background="{DynamicResource PrimaryHueMidBrush}" Height="60" VerticalAlignment="Top" Margin="0 145 0 0"/>
@@ -118,5 +117,6 @@
             <ProgressBar x:Name="loadingProgressBar" Height="25" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="900"/>
             <TextBlock x:Name="loadingInformationText" Text="Data reload required" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#DD000000" Background="#4CFFFFFF"/>
         </Grid>
+        <Grid x:Name="settingsDisplayGrid" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Window>

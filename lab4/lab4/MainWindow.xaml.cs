@@ -28,6 +28,7 @@ namespace lab4
         {
             InitializeComponent();
         }
+
         List<UserControlGeneral>[] newsCategoryArray = new List<UserControlGeneral>[]
         {
             new List<UserControlGeneral>(),
@@ -39,16 +40,9 @@ namespace lab4
             new List<UserControlGeneral>(),
         };
 
-        //List<UserControlGeneral> newsCategoryGeneral = new List<UserControlGeneral>();
-        //List<UserControlGeneral> newsCategoryTechnology = new List<UserControlGeneral>();
-        //List<UserControlGeneral> newsCategoryBusiness = new List<UserControlGeneral>();
-        //List<UserControlGeneral> newsCategoryScience = new List<UserControlGeneral>();
-        //List<UserControlGeneral> newsCategoryEntertainment = new List<UserControlGeneral>();
-        //List<UserControlGeneral> newsCategoryHealth = new List<UserControlGeneral>();
-        //List<UserControlGeneral> newsCategorySports = new List<UserControlGeneral>();
         UserControlGeneral newsCategoryEmpty = new UserControlGeneral();
 
-
+        UserControlSettingsPage settingsPage = new UserControlSettingsPage();
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -69,7 +63,7 @@ namespace lab4
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-
+            OpenSettings();
         }
 
         private void MainGrid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -84,33 +78,19 @@ namespace lab4
             }
         }
 
+        private void OpenSettings()
+        {
+            
+            contentGrid.Children.Clear();
+            contentGrid.Children.Add(settingsPage);
+            //settingsDisplayGrid.Children.Add(settingsPage);
+        }
+
         private async void GenerateArticlePage(List<UserControlGeneral> articleList)
         {
             contentGrid.Children.Clear();
             if (articleList.Count != 0)
             {
-                //int rowsNumber = (articleList.Count() + 1) / 2;
-                //while (rowsNumber != 0)
-                //{
-                //    contentGrid.RowDefinitions.Add(new RowDefinition());
-                //    rowsNumber--;
-                //}
-                //int i = 0;
-                //int j = 0;
-                //foreach (var article in articleList)
-                //{
-                //    Grid.SetColumn(article, i);
-                //    Grid.SetRow(article, j);
-                //    contentGrid.Children.Add(article);
-
-                //    if (i == 0)
-                //        i++;
-                //    else
-                //    {
-                //        i--;
-                //        j++;
-                //    }
-                //}
                 contentGrid.Columns = 2;
                 foreach (var article in articleList)
                 {
@@ -127,39 +107,7 @@ namespace lab4
             int index = listViewMenu.SelectedIndex;
             MoveMenuPointer(index);
 
-            //contentGrid.ColumnDefinitions.Clear();
-            //contentGrid.RowDefinitions.Clear();
-            //contentGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            //contentGrid.ColumnDefinitions.Add(new ColumnDefinition());
-
             GenerateArticlePage(newsCategoryArray[index]);
-
-            //switch (index)
-            //{
-            //    case 0:
-            //        GenerateArticlePage(newsCategoryGeneral);
-            //        break;
-            //    case 1:
-            //        GenerateArticlePage(newsCategoryTechnology);
-            //        break;
-            //    case 2:
-            //        GenerateArticlePage(newsCategoryBusiness);
-            //        break;
-            //    case 3:
-            //        GenerateArticlePage(newsCategoryScience);
-            //        break;
-            //    case 4:
-            //        GenerateArticlePage(newsCategoryEntertainment);
-            //        break;
-            //    case 5:
-            //        GenerateArticlePage(newsCategoryHealth);
-            //        break;
-            //    case 6:
-            //        GenerateArticlePage(newsCategorySports);
-            //        break;
-            //    default:
-            //        break;
-            //}
         }
 
         private void MoveMenuPointer(int index)
@@ -188,10 +136,9 @@ namespace lab4
                     listElement.UrlToWebsite = article.Url;
                     listElement.ArticleID = article.ArticleID;
                     listElement.IsFavourite = article.Favourite;
-
+                    
                     if (article.UrlToImage != null)
                     {
-                        //listElement.imageTooltip.Text = article.UrlToImage;
                         while (article.UrlToImage[0] == '/')
                         {
                             article.UrlToImage = article.UrlToImage.Remove(0, 1);
@@ -254,6 +201,11 @@ namespace lab4
 
         private async void ReloadButton_Click(object sender, RoutedEventArgs e)
         {
+            await ReloadNews();
+        }
+
+        private async Task ReloadNews()
+        {
             string loadingBeginning = "Loading: ";
             string loadingEnding = " news...";
 
@@ -262,7 +214,7 @@ namespace lab4
             //this.Resources.MergedDictionaries.Clear();
             //this.Resources.MergedDictionaries.Add(newRes);
 
-            RemoveOlderFromDatabase(1);
+            RemoveOlderFromDatabase(Properties.Settings.Default.RemoveNewsAfterInDays);
 
             try
             {
@@ -287,89 +239,6 @@ namespace lab4
 
                     progress++;
                 }
-
-                ////general
-                //loadingInformationText.Text = loadingBeginning + "general" + loadingEnding;
-                //loadingProgressBar.Value = (int)Math.Round(0.0 * 100.0 / 7.0);
-                //jsonResponse = await NewsApiConnection.LoadDataAsync("general");
-                //newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
-
-                //LoadArticle(newsCollection, newsCategoryGeneral, ArticleCategory.general);
-
-                //if (listViewMenu.SelectedIndex == 0)
-                //    GenerateArticlePage(newsCategoryGeneral);
-                ////newsCategoryGeneral.newsTitle.Text = newsCollection.Articles[1].Title;
-                ////newsCategoryGeneral.newsDescription.Text = newsCollection.Articles[1].Description;
-                ////newsCategoryGeneral.newsLink.Text = newsCollection.Articles[1].Source.Name;
-                ////if (newsCollection.Articles[1].UrlToImage != null)
-                ////    newsCategoryGeneral.newsImage.Source = new BitmapImage(new Uri(newsCollection.Articles[1].UrlToImage));
-
-
-                ////technology
-                //loadingInformationText.Text = loadingBeginning + "technology" + loadingEnding;
-                //loadingProgressBar.Value = (int)Math.Round(1.0 * 100.0 / 7.0);
-                //jsonResponse = await NewsApiConnection.LoadDataAsync("technology");
-                //newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
-
-                //LoadArticle(newsCollection, newsCategoryTechnology, ArticleCategory.technology);
-
-                //if (listViewMenu.SelectedIndex == 1)
-                //    GenerateArticlePage(newsCategoryTechnology);
-
-                ////business
-                //loadingInformationText.Text = loadingBeginning + "business" + loadingEnding;
-                //loadingProgressBar.Value = (int)Math.Round(2.0 * 100.0 / 7.0);
-                //jsonResponse = await NewsApiConnection.LoadDataAsync("business");
-                //newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
-
-                //LoadArticle(newsCollection, newsCategoryBusiness, ArticleCategory.business);
-
-                //if (listViewMenu.SelectedIndex == 2)
-                //    GenerateArticlePage(newsCategoryBusiness);
-
-                ////science
-                //loadingInformationText.Text = loadingBeginning + "science" + loadingEnding;
-                //loadingProgressBar.Value = (int)Math.Round(3.0 * 100.0 / 7.0);
-                //jsonResponse = await NewsApiConnection.LoadDataAsync("science");
-                //newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
-
-                //LoadArticle(newsCollection, newsCategoryScience, ArticleCategory.science);
-
-                //if (listViewMenu.SelectedIndex == 3)
-                //    GenerateArticlePage(newsCategoryScience);
-
-                ////entertainment
-                //loadingInformationText.Text = loadingBeginning + "entertainment" + loadingEnding;
-                //loadingProgressBar.Value = (int)Math.Round(4.0 * 100.0 / 7.0);
-                //jsonResponse = await NewsApiConnection.LoadDataAsync("entertainment");
-                //newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
-
-                //LoadArticle(newsCollection, newsCategoryEntertainment, ArticleCategory.entertainment);
-
-                //if (listViewMenu.SelectedIndex == 4)
-                //    GenerateArticlePage(newsCategoryEntertainment);
-
-                ////health
-                //loadingInformationText.Text = loadingBeginning + "health" + loadingEnding;
-                //loadingProgressBar.Value = (int)Math.Round(5.0 * 100.0 / 7.0);
-                //jsonResponse = await NewsApiConnection.LoadDataAsync("health");
-                //newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
-
-                //LoadArticle(newsCollection, newsCategoryHealth, ArticleCategory.health);
-
-                //if (listViewMenu.SelectedIndex == 5)
-                //    GenerateArticlePage(newsCategoryHealth);
-
-                ////sports
-                //loadingInformationText.Text = loadingBeginning + "sports" + loadingEnding;
-                //loadingProgressBar.Value = (int)Math.Round(6.0 * 100.0 / 7.0);
-                //jsonResponse = await NewsApiConnection.LoadDataAsync("sports");
-                //newsCollection = JsonConvert.DeserializeObject<ArticleCollection>(jsonResponse);
-
-                //LoadArticle(newsCollection, newsCategorySports, ArticleCategory.sports);
-
-                //if (listViewMenu.SelectedIndex == 6)
-                //    GenerateArticlePage(newsCategorySports);
             }
             catch (ArgumentException ex) when (ex.ParamName == "category")
             {

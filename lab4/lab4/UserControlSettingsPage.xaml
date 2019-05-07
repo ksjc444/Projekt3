@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="lab4.UserControlSettingsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:lab4"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" x:Key="description">
+            <Setter Property="Margin" Value="0 0 10 0"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+        <Style TargetType="StackPanel" x:Key="option">
+            <Setter Property="Margin" Value="0 10 0 0"/>
+            <Setter Property="Orientation" Value="Horizontal"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid Width="800" Height="auto" Margin="0 10">
+        <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect ExpandIn, Duration=0:0:0.2}">
+            <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth2" Padding="0" VerticalAlignment="Stretch">
+                <Grid>
+                    <StackPanel>
+                        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="800">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="20 0 30 0" HorizontalAlignment="Right">
+                                <StackPanel Style="{StaticResource option}">
+                                    <ToggleButton IsChecked="{Binding Path=RefreshNewsOnStartup, Mode=TwoWay}"/>
+                                    <TextBlock Text="Odśwież wiadomości automatycznie przy starcie" Margin="20 5" FontSize="16" MaxWidth="300" TextWrapping="Wrap"/>
+                                </StackPanel>
+
+                                <StackPanel Style="{StaticResource option}">
+                                    <ToggleButton/>
+                                    <TextBlock Text="inna opcja" Margin="20 5" FontSize="16" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="20 0 30 0" HorizontalAlignment="Right">
+                                <StackPanel Style="{StaticResource option}">
+                                    <TextBlock Text="Usuwaj artykuły starsze niż: " Style="{StaticResource description}"/>
+                                    <TextBox materialDesign:HintAssist.Hint="Dni" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="50" Text="{Binding Path=RemoveNewsAfterInDays, Mode=TwoWay}"/>
+                                </StackPanel>
+                                <StackPanel Style="{StaticResource option}">
+                                    <TextBlock Text="Odświeżaj wiadomości co: " Style="{StaticResource description}"/>
+                                    <TextBox materialDesign:HintAssist.Hint="Godziny" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="50" Text="{Binding Path=NewsAutoRefreshInHours, Mode=TwoWay}"/>
+                                </StackPanel>
+                                <StackPanel Style="{StaticResource option}">
+                                    <TextBlock Text="Motyw kolorystyczny: " Style="{StaticResource description}"/>
+                                    <ComboBox materialDesign:HintAssist.Hint="Motyw" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Text="{Binding Path=Theme, Mode=TwoWay}">
+                                        <ComboBoxItem>DeepPurple</ComboBoxItem>
+                                        <ComboBoxItem>Lime</ComboBoxItem>
+                                    </ComboBox>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 40 0 20">
+                            <Button x:Name="saveChangesButton" Content="Zapisz" Margin="10 0" Click="SaveChangesButton_Click"/>
+                            <Button x:Name="cancelButton" Content="Anuluj" Margin="10 0" Click="CancelButton_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:Card>
+        </materialDesign:TransitioningContent>
+    </Grid>
+</UserControl>
