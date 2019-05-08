@@ -9,6 +9,6 @@ namespace lab4.UnitTest
         [TestMethod]
         public void TestMethod1()
         {
-        }
+        } 
     }
 }
