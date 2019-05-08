@@ -24,9 +24,21 @@ namespace lab4
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ContentViewManager contentViewManager = new ContentViewManager();
+        Dictionary<int, ArticleCategory> categoryDictionary = new Dictionary<int, ArticleCategory>
+        {
+            [0] = ArticleCategory.general,
+            [1] = ArticleCategory.technology,
+            [2] = ArticleCategory.business,
+            [3] = ArticleCategory.science,
+            [4] = ArticleCategory.entertainment,
+            [5] = ArticleCategory.health,
+            [6] = ArticleCategory.sports
+        };
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = contentViewManager;
         }
 
         List<UserControlGeneral>[] newsCategoryArray = new List<UserControlGeneral>[]
@@ -43,6 +55,7 @@ namespace lab4
         UserControlGeneral newsCategoryEmpty = new UserControlGeneral();
 
         UserControlSettingsPage settingsPage = new UserControlSettingsPage();
+        UserControlTest testPage = new UserControlTest();
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -54,10 +67,12 @@ namespace lab4
             if (this.WindowState == System.Windows.WindowState.Normal)
             {
                 this.WindowState = System.Windows.WindowState.Maximized;
+                contentViewManager.NumberOfColumns = 3;
             }
             else
             {
                 this.WindowState = System.Windows.WindowState.Normal;
+                contentViewManager.NumberOfColumns = 2;
             }
         }
 
@@ -80,34 +95,36 @@ namespace lab4
 
         private void OpenSettings()
         {
-            
-            contentGrid.Children.Clear();
-            contentGrid.Children.Add(settingsPage);
-            //settingsDisplayGrid.Children.Add(settingsPage);
+
+            //contentGrid.Children.Clear();
+            //contentGrid.Children.Add(settingsPage);
+
+            settingsDisplayGrid.Children.Clear();
+            settingsDisplayGrid.Children.Add(settingsPage);
         }
 
-        private async void GenerateArticlePage(List<UserControlGeneral> articleList)
-        {
-            contentGrid.Children.Clear();
-            if (articleList.Count != 0)
-            {
-                contentGrid.Columns = 2;
-                foreach (var article in articleList)
-                {
-                    contentGrid.Children.Add(article);
-                }
-            }
-            else
-                contentGrid.Children.Add(newsCategoryEmpty);
-        }
+        //private async void GenerateArticlePage(List<UserControlGeneral> articleList)
+        //{
+        //    contentGrid.Children.Clear();
+        //    if (articleList.Count != 0)
+        //    {
+        //        contentGrid.Columns = 2;
+        //        foreach (var article in articleList)
+        //        {
+        //            contentGrid.Children.Add(article);
+        //        }
+        //    }
+        //    else
+        //        contentGrid.Children.Add(newsCategoryEmpty);
+        //}
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
             int index = listViewMenu.SelectedIndex;
             MoveMenuPointer(index);
-
-            GenerateArticlePage(newsCategoryArray[index]);
+            contentViewManager.ShowNewsFromCategory(categoryDictionary[index]);
+            //GenerateArticlePage(newsCategoryArray[index]);
         }
 
         private void MoveMenuPointer(int index)
@@ -234,8 +251,8 @@ namespace lab4
 
                     LoadArticle(newsCollection, newsCategoryArray[(int)category], category);
 
-                    if (listViewMenu.SelectedIndex == (int)category)
-                        GenerateArticlePage(newsCategoryArray[(int)category]);
+                    //if (listViewMenu.SelectedIndex == (int)category)
+                    //    GenerateArticlePage(newsCategoryArray[(int)category]);
 
                     progress++;
                 }
@@ -267,6 +284,17 @@ namespace lab4
 
         }
 
+        private void TestButton_Click(object sender, RoutedEventArgs e)
+        {
+            //contentGrid.Children.Clear();
+            //contentGrid.Children.Add(testPage);
+        }
 
+        private void ContentScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scv = (ScrollViewer)sender;
+            scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta/2);
+            e.Handled = true;
+        }
     }
 }

@@ -47,8 +47,8 @@ namespace lab4
 
         public void TestControlerButtno_Click(object sender, RoutedEventArgs e)
         {
-            if (UrlToWebsite != null)
-                OpenWebsite(UrlToWebsite);
+            if (websiteUrl.Text != null)
+                OpenWebsite(websiteUrl.Text);
         }
 
         private void FavouriteButton_Click(object sender, RoutedEventArgs e)
@@ -65,6 +65,11 @@ namespace lab4
                 FavouriteButton.Opacity = 0.5;
                 IsFavourite = false;
             }
+        }
+
+        private void FavouriteButton_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

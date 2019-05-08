@@ -6,29 +6,37 @@
              xmlns:local="clr-namespace:lab4"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="465" d:DesignWidth="550">
+             d:DesignHeight="465" d:DesignWidth="460">
+    <UserControl.Resources>
+        <BitmapImage x:Key="DefaultNewsImage" UriSource="default_news_image.png" />
+    </UserControl.Resources>
     <materialDesign:TransitioningContent x:Name="transitioningContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
         <Grid Background="White" Width="400" Margin="20">
             <DockPanel>
-                <Button x:Name="goToWebsite" Content="Przejdź do strony" DockPanel.Dock="Bottom" d:LayoutOverrides="Height" Click="TestControlerButtno_Click"/>
+                <Button x:Name="goToWebsite" Content="Przejdź do strony" Command="" DockPanel.Dock="Bottom" d:LayoutOverrides="Height" Click="TestControlerButtno_Click">
+                    <Button.ToolTip>
+                        <TextBlock Text="{Binding UrlToImage}"/>
+                    </Button.ToolTip>
+                </Button>
                 <StackPanel>
-                    <Image x:Name="newsImage" Source="default_news_image.png" Height="250"/>
-                    <TextBlock x:Name="newsTitle" Text="Nagłówek" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Margin="5" TextWrapping="Wrap"/>
-                    <TextBlock x:Name="newsDescription" Text="Treść" FontSize="14" Margin="5" TextWrapping="Wrap"/>
-                    <TextBlock x:Name="newsLink" Text="źródło" FontSize="12" Margin="10" FontStyle="Italic" TextWrapping="Wrap"/>
+                    <Image x:Name="newsImage" Source="{Binding UrlToImage, FallbackValue={StaticResource DefaultNewsImage}, TargetNullValue={StaticResource DefaultNewsImage}}" Height="250"/>
+                    <TextBlock x:Name="newsTitle" Text="{Binding Title, FallbackValue=Nagłówek}" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Margin="5" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="newsDescription" Text="{Binding Description, FallbackValue=Treść}" FontSize="14" Margin="5" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="newsLink" Text="{Binding SourceName, FallbackValue=źródło}" FontSize="12" Margin="10" FontStyle="Italic" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="websiteUrl" Text="{Binding Url}" Visibility="Collapsed"/>
                 </StackPanel>
             </DockPanel>
 
-            <Button x:Name="FavouriteButton" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="{DynamicResource PrimaryHueLightBrush}" VerticalAlignment="Top" HorizontalAlignment="Right" Click="FavouriteButton_Click" Opacity="0.5">
+            <ToggleButton x:Name="FavouriteButton" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="{DynamicResource PrimaryHueLightBrush}" VerticalAlignment="Top" HorizontalAlignment="Right" Click="FavouriteButton_Click" Opacity="0.5" Checked="FavouriteButton_Checked">
                 <Border CornerRadius="20" Background="LightGray">
                     <materialDesign:PackIcon Kind="Star" Height="30" Width="30"/>
                 </Border>
-                <Button.ToolTip>
+                <ToggleButton.ToolTip>
                     <ToolTip>
                         <TextBlock Text="Dodaj do ulubionych"/>
                     </ToolTip>
-                </Button.ToolTip>
-            </Button>
+                </ToggleButton.ToolTip>
+            </ToggleButton>
         </Grid>
     </materialDesign:TransitioningContent>
 </UserControl>

@@ -36,5 +36,10 @@ namespace lab4
         {
             settings.CancelChanges();
         }
+
+        private void TestToggle_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

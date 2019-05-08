@@ -29,7 +29,21 @@ namespace lab4
         public DateTime PublishedAt { get; set; }
         public string Content { get; set; }
 
-        public ArticleCategory Category {get; set;}
+        public ArticleCategory Category { get; set; }
         public bool Favourite { get; set; }
+
+        public string SourceName
+        {
+            get
+            {
+                if (Source == null)
+                    return null;
+                return Source.Name;
+            }
+            set
+            {
+                Source.Name = value;
+            }
+        }
     }
 }

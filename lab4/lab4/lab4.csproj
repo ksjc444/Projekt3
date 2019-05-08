@@ -103,13 +103,18 @@
     </ApplicationDefinition>
     <Compile Include="ArticleContext.cs" />
     <Compile Include="ArticleCategory.cs" />
+    <Compile Include="ContentViewManager.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Source.cs" />
+    <Compile Include="Test.cs" />
     <Compile Include="UserControlGeneral.xaml.cs">
       <DependentUpon>UserControlGeneral.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlSettingsPage.xaml.cs">
       <DependentUpon>UserControlSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlTest.xaml.cs">
+      <DependentUpon>UserControlTest.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -128,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

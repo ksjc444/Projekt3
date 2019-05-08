@@ -35,6 +35,7 @@
                             </ContextMenu>
                         </Button.ContextMenu>
                     </Button>
+                    <Button x:Name="testButton" Margin="20 0" Content="test" Click="TestButton_Click" Height="Auto"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button x:Name="settingsButton" Margin="0,1,30,1" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Click="SettingsButton_Click">
@@ -53,8 +54,33 @@
             </Grid>
         </StackPanel>
         <Grid Margin="250 55 0 60">
-            <ScrollViewer>
-                <UniformGrid x:Name="contentGrid" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ScrollViewer x:Name="contentScrollViewer" PreviewMouseWheel="ContentScrollViewer_PreviewMouseWheel">
+                <!--<UniformGrid x:Name="contentGrid" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
+                <ListView x:Name="contentListView" ItemsSource="{Binding ArticleList}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="Article">
+                            <local:UserControlGeneral/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate x:Name="ItemsPanelTemplate">
+                            <UniformGrid x:Name="ContentUniformGrid" Columns="{Binding NumberOfColumns, FallbackValue=2}" />
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Grid>
+                                            <ContentPresenter/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
             </ScrollViewer>
         </Grid>
         <Grid HorizontalAlignment="Left" Width="250" Background="#353535">

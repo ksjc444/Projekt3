@@ -76,14 +76,6 @@ namespace lab4
             }
         }
 
-        //public void setAll(int RemoveNewsAfterInDays, int NewsAutoRefreshInHours, bool RefreshNewsOnStartup, string Theme)
-        //{
-        //    this.RemoveNewsAfterInDays = RemoveNewsAfterInDays;
-        //    this.NewsAutoRefreshInHours = NewsAutoRefreshInHours;
-        //    this.RefreshNewsOnStartup = RefreshNewsOnStartup;
-        //    this.Theme = Theme;
-        //}
-
         public void SaveChanges()
         {
             Properties.Settings.Default.RemoveNewsAfterInDays = removeNewsAfterInDays;

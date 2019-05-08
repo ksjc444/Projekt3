@@ -37,7 +37,7 @@
                                 </StackPanel>
 
                                 <StackPanel Style="{StaticResource option}">
-                                    <ToggleButton/>
+                                    <ToggleButton x:Name="testToggle" Checked="TestToggle_Checked"/>
                                     <TextBlock Text="inna opcja" Margin="20 5" FontSize="16" TextWrapping="Wrap"/>
                                 </StackPanel>
                             </StackPanel>
