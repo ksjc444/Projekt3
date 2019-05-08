@@ -27,7 +27,7 @@
                 </StackPanel>
             </DockPanel>
 
-            <ToggleButton x:Name="FavouriteButton" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="{DynamicResource PrimaryHueLightBrush}" VerticalAlignment="Top" HorizontalAlignment="Right" Click="FavouriteButton_Click" Opacity="0.5" Checked="FavouriteButton_Checked">
+            <ToggleButton x:Name="FavouriteButton" IsChecked="{Binding Favourite, Mode=TwoWay}" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="{DynamicResource PrimaryHueLightBrush}" VerticalAlignment="Top" HorizontalAlignment="Right" Click="FavouriteButton_Click" Opacity="0.5" Checked="FavouriteButton_Checked" Unchecked="FavouriteButton_Unchecked">
                 <Border CornerRadius="20" Background="LightGray">
                     <materialDesign:PackIcon Kind="Star" Height="30" Width="30"/>
                 </Border>

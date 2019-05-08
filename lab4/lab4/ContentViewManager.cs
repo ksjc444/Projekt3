@@ -67,7 +67,7 @@ namespace lab4
         {
             using (var db = new ArticleContext())
             {
-                ArticleList = db.Articles.Where(x => x.Category == category).ToList();
+                ArticleList = db.Articles.Where(x => x.Category == category && x.Country == Properties.Settings.Default.NewsSourceCountryCode).ToList();
             }
         }
 

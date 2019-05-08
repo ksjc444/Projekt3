@@ -31,6 +31,7 @@ namespace lab4
 
         public ArticleCategory Category { get; set; }
         public bool Favourite { get; set; }
+        public string Country { get; set; }
 
         public string SourceName
         {

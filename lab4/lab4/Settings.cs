@@ -14,6 +14,9 @@ namespace lab4
         private int newsAutoRefreshInHours = Properties.Settings.Default.NewsAutoRefreshInHours;
         private bool refreshNewsOnStartup = Properties.Settings.Default.RefreshNewsOnStartup;
         private string theme = Properties.Settings.Default.Theme;
+        private string newsSourceCountryCode = Properties.Settings.Default.NewsSourceCountryCode;
+
+        public bool ThemeChanged { get; set; } = false;
 
         public int RemoveNewsAfterInDays
         {
@@ -71,10 +74,27 @@ namespace lab4
                 if (theme != value)
                 {
                     theme = value;
+                    ThemeChanged = true;
                     OnPropertyChanged();
                 }
             }
         }
+        public string NewsSourceCountryCode
+        {
+            get
+            {
+                return newsSourceCountryCode;
+            }
+            set
+            {
+                if (newsSourceCountryCode != value)
+                {
+                    newsSourceCountryCode = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
 
         public void SaveChanges()
         {
@@ -82,6 +102,7 @@ namespace lab4
             Properties.Settings.Default.NewsAutoRefreshInHours = newsAutoRefreshInHours;
             Properties.Settings.Default.RefreshNewsOnStartup = refreshNewsOnStartup;
             Properties.Settings.Default.Theme = theme;
+            Properties.Settings.Default.NewsSourceCountryCode = newsSourceCountryCode;
 
             Properties.Settings.Default.Save();
         }
@@ -92,8 +113,8 @@ namespace lab4
             NewsAutoRefreshInHours = Properties.Settings.Default.NewsAutoRefreshInHours;
             RefreshNewsOnStartup = Properties.Settings.Default.RefreshNewsOnStartup;
             Theme = Properties.Settings.Default.Theme;
+            newsSourceCountryCode = Properties.Settings.Default.NewsSourceCountryCode;
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)

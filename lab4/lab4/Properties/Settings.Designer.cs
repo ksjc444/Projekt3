@@ -70,5 +70,17 @@ namespace lab4.Properties {
                 this["Theme"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("pl")]
+        public string NewsSourceCountryCode {
+            get {
+                return ((string)(this["NewsSourceCountryCode"]));
+            }
+            set {
+                this["NewsSourceCountryCode"] = value;
+            }
+        }
     }
 }

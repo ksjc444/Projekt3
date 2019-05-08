@@ -53,23 +53,21 @@ namespace lab4
 
         private void FavouriteButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!IsFavourite)
-            {
-                FavouriteButton.Foreground = (Brush)new BrushConverter().ConvertFromString(Application.Current.Resources["SecondaryAccentBrush"].ToString());
-                FavouriteButton.Opacity = 1;
-                IsFavourite = true;
-            }
-            else
-            {
-                FavouriteButton.Foreground = (Brush)new BrushConverter().ConvertFromString(Application.Current.Resources["PrimaryHueLightBrush"].ToString());
-                FavouriteButton.Opacity = 0.5;
-                IsFavourite = false;
-            }
+
         }
 
         private void FavouriteButton_Checked(object sender, RoutedEventArgs e)
         {
+            FavouriteButton.Foreground = (Brush)new BrushConverter().ConvertFromString(Application.Current.Resources["SecondaryAccentBrush"].ToString());
+            FavouriteButton.Opacity = 1;
+            IsFavourite = true;
+        }
 
+        private void FavouriteButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            FavouriteButton.Foreground = (Brush)new BrushConverter().ConvertFromString(Application.Current.Resources["PrimaryHueLightBrush"].ToString());
+            FavouriteButton.Opacity = 0.5;
+            IsFavourite = false;
         }
     }
 }

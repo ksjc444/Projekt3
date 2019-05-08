@@ -39,23 +39,12 @@ namespace lab4
         {
             InitializeComponent();
             DataContext = contentViewManager;
+            ChangeTheme();
+            if (Properties.Settings.Default.RefreshNewsOnStartup)
+                ReloadNews();
         }
 
-        List<UserControlGeneral>[] newsCategoryArray = new List<UserControlGeneral>[]
-        {
-            new List<UserControlGeneral>(),
-            new List<UserControlGeneral>(),
-            new List<UserControlGeneral>(),
-            new List<UserControlGeneral>(),
-            new List<UserControlGeneral>(),
-            new List<UserControlGeneral>(),
-            new List<UserControlGeneral>(),
-        };
-
-        UserControlGeneral newsCategoryEmpty = new UserControlGeneral();
-
         UserControlSettingsPage settingsPage = new UserControlSettingsPage();
-        UserControlTest testPage = new UserControlTest();
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -103,28 +92,12 @@ namespace lab4
             settingsDisplayGrid.Children.Add(settingsPage);
         }
 
-        //private async void GenerateArticlePage(List<UserControlGeneral> articleList)
-        //{
-        //    contentGrid.Children.Clear();
-        //    if (articleList.Count != 0)
-        //    {
-        //        contentGrid.Columns = 2;
-        //        foreach (var article in articleList)
-        //        {
-        //            contentGrid.Children.Add(article);
-        //        }
-        //    }
-        //    else
-        //        contentGrid.Children.Add(newsCategoryEmpty);
-        //}
-
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
             int index = listViewMenu.SelectedIndex;
             MoveMenuPointer(index);
             contentViewManager.ShowNewsFromCategory(categoryDictionary[index]);
-            //GenerateArticlePage(newsCategoryArray[index]);
         }
 
         private void MoveMenuPointer(int index)
@@ -138,51 +111,16 @@ namespace lab4
             WindowState = WindowState.Minimized;
         }
 
-        private async void LoadArticle(ArticleCollection newsCollection, List<UserControlGeneral> articlePage, ArticleCategory category)
+        public void ChangeTheme()
         {
-            articlePage.Clear();
-            AddToDatabase(newsCollection, category);
-            using (var db = new ArticleContext())
-            {
-                foreach (var article in db.Articles.Where(x => x.Category == category))
-                {
-                    UserControlGeneral listElement = new UserControlGeneral();
-                    listElement.newsTitle.Text = article.Title;
-                    listElement.newsDescription.Text = article.Description;
-                    listElement.newsLink.Text = article.Source.Name;
-                    listElement.UrlToWebsite = article.Url;
-                    listElement.ArticleID = article.ArticleID;
-                    listElement.IsFavourite = article.Favourite;
-                    
-                    if (article.UrlToImage != null)
-                    {
-                        while (article.UrlToImage[0] == '/')
-                        {
-                            article.UrlToImage = article.UrlToImage.Remove(0, 1);
-                        }
-                        try
-                        {
-                            listElement.newsImage.Source = new BitmapImage(new Uri(article.UrlToImage));
-                        }
-                        catch (UriFormatException e)
-                        {
-                            Console.WriteLine("Exception uri: " + e);
-                        }
-                        catch (IOException e)
-                        {
-                            Console.WriteLine("Exception io: " + e);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine("Exception default: " + e);
-                        }
-
-                    }
-                    articlePage.Add(listElement);
-                }
-            }
+            ResourceDictionary newRes = new ResourceDictionary();
+            string uriStart = "pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.";
+            newRes.Source = new Uri(uriStart + Properties.Settings.Default.Theme + ".xaml", UriKind.RelativeOrAbsolute);
+            Resources.MergedDictionaries.Clear();
+            Resources.MergedDictionaries.Add(newRes);
         }
 
+       
         private static void AddToDatabase(ArticleCollection newsCollection, ArticleCategory category)
         {
             List<Article> newArticlesList = new List<Article>();
@@ -194,6 +132,7 @@ namespace lab4
                     if (!db.Articles.Where(x => x.Category == category).Any(x => x.Url == article.Url))
                     {
                         article.Category = category;
+                        article.Country = Properties.Settings.Default.NewsSourceCountryCode;
                         newArticlesList.Add(article);
                     }
                 }
@@ -249,9 +188,10 @@ namespace lab4
 
                     ArticleCategory category = (ArticleCategory)Enum.Parse(typeof(ArticleCategory), categoryName);
 
-                    LoadArticle(newsCollection, newsCategoryArray[(int)category], category);
-
-                    //if (listViewMenu.SelectedIndex == (int)category)
+                    //LoadArticle(newsCollection, newsCategoryArray[(int)category], category);
+                    AddToDatabase(newsCollection, category);
+                    if (listViewMenu.SelectedIndex == (int)category)
+                        contentViewManager.ShowNewsFromCategory(category);
                     //    GenerateArticlePage(newsCategoryArray[(int)category]);
 
                     progress++;
