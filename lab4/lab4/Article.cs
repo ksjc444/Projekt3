@@ -28,10 +28,11 @@ namespace lab4
         public string UrlToImage { get; set; }
         public DateTime PublishedAt { get; set; }
         public string Content { get; set; }
-
+        
         public ArticleCategory Category { get; set; }
         public bool Favourite { get; set; }
         public string Country { get; set; }
+        public string LocalPathToImage { get; set; }
 
         public string SourceName
         {

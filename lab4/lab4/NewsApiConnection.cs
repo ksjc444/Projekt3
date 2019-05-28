@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace lab4
 {
-    class NewsApiConnection
+    public class NewsApiConnection
     {
         //Endpoints
         static Dictionary<string, string> apiBaseUrl = new Dictionary<string, string>()
@@ -34,7 +34,6 @@ namespace lab4
                 {
                     result = content.ReadAsStringAsync();
                 }
-
                 return await result;
             }
             else

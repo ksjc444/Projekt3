@@ -11,14 +11,14 @@ namespace lab4
     public class ContentViewManager : INotifyPropertyChanged
     {
 
-        Article mock = new Article()
-        {
-            Author = "Admin",
-            Title = "Przykładowy artukuł",
-            Description = "Tak wygląda przykładowy artykuł",
-            PublishedAt = DateTime.Now,
-            Category = ArticleCategory.general
-        };
+        //Article mock = new Article()
+        //{
+        //    Author = "Admin",
+        //    Title = "Przykładowy artukuł",
+        //    Description = "Tak wygląda przykładowy artykuł",
+        //    PublishedAt = DateTime.Now,
+        //    Category = ArticleCategory.general
+        //};
 
 
         public ContentViewManager()
@@ -63,7 +63,7 @@ namespace lab4
             }
         }
 
-        public void ShowNewsFromCategory(ArticleCategory category)
+        public async void ShowNewsFromCategory(ArticleCategory category)
         {
             using (var db = new ArticleContext())
             {

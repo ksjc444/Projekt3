@@ -13,7 +13,7 @@
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="MainWindow" Height="600" Width="1200" WindowStyle="None" ResizeMode="NoResize">
+        Title="MainWindow" Height="640" Width="1200" WindowStyle="None" ResizeMode="NoResize">
 
     <Grid x:Name="mainGrid" Background="#FFEEEEEE" MouseDown="MainGrid_MouseDown">
         <Label Content="Powered by newsapi.org" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5" Margin="250 0 0 0"/>
@@ -35,9 +35,11 @@
                             </ContextMenu>
                         </Button.ContextMenu>
                     </Button>
-                    <Button x:Name="testButton" Margin="20 0" Content="test" Click="TestButton_Click" Height="Auto"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="infoButton" Margin="0,1,30,1" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Click="InfoButton_Click">
+                        <materialDesign:PackIcon Kind="Information" Height="25" Width="25"/>
+                    </Button>
                     <Button x:Name="settingsButton" Margin="0,1,30,1" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Click="SettingsButton_Click">
                         <materialDesign:PackIcon Kind="Settings" Height="25" Width="25"/>
                     </Button>

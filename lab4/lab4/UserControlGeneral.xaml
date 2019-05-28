@@ -19,7 +19,7 @@
                     </Button.ToolTip>
                 </Button>
                 <StackPanel>
-                    <Image x:Name="newsImage" Source="{Binding UrlToImage, FallbackValue={StaticResource DefaultNewsImage}, TargetNullValue={StaticResource DefaultNewsImage}}" Height="250"/>
+                    <Image x:Name="newsImage" Source="{Binding LocalPathToImage, FallbackValue={StaticResource DefaultNewsImage}, TargetNullValue={StaticResource DefaultNewsImage}}" Height="250"/>
                     <TextBlock x:Name="newsTitle" Text="{Binding Title, FallbackValue=Nagłówek}" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Margin="5" TextWrapping="Wrap"/>
                     <TextBlock x:Name="newsDescription" Text="{Binding Description, FallbackValue=Treść}" FontSize="14" Margin="5" TextWrapping="Wrap"/>
                     <TextBlock x:Name="newsLink" Text="{Binding SourceName, FallbackValue=źródło}" FontSize="12" Margin="10" FontStyle="Italic" TextWrapping="Wrap"/>
